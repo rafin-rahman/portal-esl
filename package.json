@@ -1,0 +1,32 @@
+{
+  "name": "portal-esl",
+  "version": "1.0.0",
+  "description": "Portal to handle company internal communication and files exchange",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafin-rahman/portal-esl.git"
+  },
+  "author": "Moshfiqur Rafin Rahman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafin-rahman/portal-esl/issues"
+  },
+  "homepage": "https://github.com/rafin-rahman/portal-esl#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.15"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.7"
+  }
+}
