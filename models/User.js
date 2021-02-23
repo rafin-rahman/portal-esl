@@ -21,8 +21,13 @@ const UserSchema = new mongoose.Schema({
     default: 'basic',
   },
   formURL: { type: String, required: true },
-  branch: { type: Array, default: [] },
-  employed: { Type: Boolean, default: true },
+  branch: {
+    type: String,
+    enum: ['London', 'Birmingham', 'Manchester'],
+  },
+  employed: { Type: Boolean },
   created: { type: Date, default: Date.now },
   university: { type: mongoose.Schema.Types.Object, ref: 'university' },
 })
+
+module.exports = User = mongoose.model('user', UserSchema)

@@ -4,6 +4,9 @@ const app = express()
 
 // Connect database
 connectDB()
+
+// Init Middleware
+app.use(express.json({ extended: false }))
 // Test get request
 app.get('/', (req, res) => res.send('API Running'))
 
