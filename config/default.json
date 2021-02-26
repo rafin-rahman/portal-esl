@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://Admin-esl:r3QVr8C1PyVktSgc@portal-esl.8pbyb.mongodb.net/portalDB?retryWrites=true&w=majority",
-  "jwtSecret": "eslSecretToken"
-}
