@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { check, validationResult } = require('express-validator')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const config = require('config')
+const { check, validationResult } = require('express-validator')
 
 const User = require('../../models/User')
 
@@ -35,7 +37,7 @@ router.post(
       // check if user exist
       let user = await User.findOne({ email: email })
       if (user) {
-        res.status(400).json({ errors: [{ msg: 'User already exist' }] })
+        return res.status(400).json({ errors: [{ msg: 'User already exist' }] })
       }
 
       user = new User({
@@ -54,8 +56,21 @@ router.post(
       user.password = await bcrypt.hash(password, salt)
 
       await user.save()
-      // Return jsonwebtoken
-      res.send('User registered')
+
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      }
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 604800 },
+        (err, token) => {
+          if (err) throw err
+          res.json({ token })
+        }
+      )
     } catch (err) {
       console.error(err.message)
       res.status(500).send('Server error')
