@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const config = require('config')
 const { check, validationResult } = require('express-validator')
 
@@ -28,6 +28,11 @@ router.post(
     }
 
     const { name, surname, email, password, branch } = req.body
+    if (!email.endsWith('@elizabethschool.com')) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Please use company email address' }] })
+    }
     const unique_name = email.substring(0, email.indexOf('@'))
     const permission = 'basic'
     const formURL = `www.elizabethschool.com/agent/${unique_name}`
