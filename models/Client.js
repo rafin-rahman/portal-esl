@@ -63,7 +63,7 @@ const ClientSchema = new mongoose.Schema({
   dateOfSubmit: {
     type: Date,
   },
-  dateOfUncon: {
+  dateOfUnconditional: {
     type: Date,
   },
 })
