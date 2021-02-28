@@ -22,9 +22,12 @@ const ClientSchema = new mongoose.Schema({
     enum: ['none', 'diploma', 'diplomaLevTwo', 'degree'],
     default: 'none',
   },
-  university: { type: mongoose.Schema.Types.Object, ref: 'university' },
-
-  course: { type: mongoose.Schema.Types.Object, ref: 'course' },
+  applications: [
+    {
+      university: { type: mongoose.Schema.Types.Object, ref: 'university' },
+      course: { type: mongoose.Schema.Types.Object, ref: 'course' },
+    },
+  ],
 
   comment: {
     type: String,

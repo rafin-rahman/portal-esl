@@ -43,7 +43,7 @@ router.post(
       if (courseModel.length > 0) {
         console.log(courseModel)
         return res.status(400).json({
-          errors: [{ msg: 'This course already exists for this University' }],
+          errors: [{ msg: `This course already exists at ${university}` }],
         })
       }
 

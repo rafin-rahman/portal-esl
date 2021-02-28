@@ -27,14 +27,17 @@ router.post(
       return res.status(400).json({ errors: errors.array() })
     }
 
-    const { name, surname, email, password, branch } = req.body
+    const { name, surname, email, password, branch, permission } = req.body
     if (!email.endsWith('@elizabethschool.com')) {
       return res
         .status(400)
         .json({ errors: [{ msg: 'Please use company email address' }] })
     }
+    if (permission === '') {
+      permission === 'basic'
+    }
+
     const unique_name = email.substring(0, email.indexOf('@'))
-    const permission = 'basic'
     const formURL = `www.elizabethschool.com/agent/${unique_name}`
     const employed = true
     const university = ''
