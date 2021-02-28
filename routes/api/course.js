@@ -30,12 +30,23 @@ router.post(
     const { name, university, category, duration } = req.body
 
     let universityModel = await University.findOne({ name: university })
+    let courseModel = await Course.find({
+      name,
+      university: universityModel.id,
+    })
     try {
       if (!universityModel) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'University not found' }] })
       }
+      if (courseModel.length > 0) {
+        console.log(courseModel)
+        return res.status(400).json({
+          errors: [{ msg: 'This course already exists for this University' }],
+        })
+      }
+
       let course = new Course({
         name,
         university: universityModel.id,
