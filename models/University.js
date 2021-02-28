@@ -34,7 +34,7 @@ const UniversitySchema = new mongoose.Schema({
   prepLink: {
     type: String,
   },
-  prepDay: [Date],
+  prepDays: [String],
   customContent: {
     type: String,
   },
