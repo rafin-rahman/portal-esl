@@ -8,7 +8,7 @@ const University = require('../../models/University')
 const Course = require('../../models/Course')
 
 // @route   POST api/clients
-// @desc    ADD a new client from Marketing Officer
+// @desc    ADD a new client
 // @access  Public
 router.post(
   '/',
@@ -40,18 +40,57 @@ router.post(
 
     let marketingOfficer = await User.findOne({ email: submittedBy })
     let universityModel = await University.findOne({ name: university })
-    let courseModel = await Course.findOne({ name: course })
+    if (!universityModel) {
+      return res.status(400).json({
+        errors: [
+          {
+            msg: `${university} does not exists`,
+          },
+        ],
+      })
+    }
+    let courseModel = await Course.findOne({
+      name: course,
+      university: universityModel.id,
+    })
+    let checkClientExist = await Client.findOne({
+      email,
+      university: universityModel.id,
+    })
+    console.log(checkClientExist)
 
     try {
       if (!marketingOfficer) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'This Marketing Officer does not exists' }] })
+        return res.status(400).json({
+          errors: [
+            {
+              msg: `This Marketing Officer does not exists`,
+            },
+          ],
+        })
       }
+
       if (!universityModel) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'This University does not exists' }] })
+        return res.status(400).json({
+          errors: [
+            {
+              msg: `${university} does not exists`,
+            },
+          ],
+        })
+      }
+      if (!courseModel) {
+        return res.status(400).json({
+          errors: [{ msg: `'${course}' does not exists at ${university}` }],
+        })
+      }
+
+      if (checkClientExist) {
+        return res.status(400).json({
+          errors: [
+            { msg: `${name} ${surname} already applied at ${university}` },
+          ],
+        })
       }
 
       let client = new Client({
@@ -67,7 +106,7 @@ router.post(
       })
 
       await client.save()
-      return res.status(200).send({ msg: 'New client added' })
+      return res.status(200).send({ msg: 'client added' })
     } catch (err) {
       console.error(err.message)
       res.status(500).send('Server Error')

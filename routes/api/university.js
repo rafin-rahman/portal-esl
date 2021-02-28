@@ -49,13 +49,13 @@ router.post(
     } = req.body
 
     try {
-      let university = await University.findOne({ name: name })
-      if (university) {
+      let universityModel = await University.findOne({ name: name })
+      if (universityModel) {
         return res.status(400).json({
           errors: [{ msg: 'University with the same name already exists' }],
         })
       }
-      university = new University({
+      let university = new University({
         name,
         campuses,
         intake,

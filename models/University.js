@@ -51,4 +51,8 @@ const UniversitySchema = new mongoose.Schema({
   },
 })
 
-module.exports = University = mongoose.model('university', UniversitySchema)
+module.exports = University = mongoose.model(
+  'university',
+  UniversitySchema,
+  'university'
+)
