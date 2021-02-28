@@ -6,7 +6,7 @@ const UniversitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  campuses: [String],
+  campuses: [{ name: { type: String }, address: { type: String } }],
   intake: [String],
   course: [
     {
@@ -37,6 +37,7 @@ const UniversitySchema = new mongoose.Schema({
   prepDays: [String],
   customContent: {
     type: String,
+    default: '',
   },
   officialLink: {
     type: String,

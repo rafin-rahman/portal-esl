@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 const courseSchema = new mongoose.Schema({
   name: { type: String, required: true },
   university: {
-    university: { type: mongoose.Schema.Types.Object, ref: 'university' },
+    type: mongoose.Schema.Types.Object,
+    ref: 'university',
+    required: true,
   },
   category: {
     type: String,
@@ -11,12 +13,14 @@ const courseSchema = new mongoose.Schema({
       'fdy2TwoYears',
       'hnd',
       'undergraduate',
-      'accelerated',
       'postgraduate',
       'topUp',
+      'phd',
       'other',
     ],
+    default: 'undergraduate',
   },
+  accelerated: { type: Boolean, default: false },
   duration: {
     type: Number,
     required: true,

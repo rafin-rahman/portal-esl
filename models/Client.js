@@ -6,6 +6,7 @@ const ClientSchema = new mongoose.Schema({
   },
   surname: {
     type: String,
+    required: true,
   },
   email: {
     type: String,
@@ -18,29 +19,26 @@ const ClientSchema = new mongoose.Schema({
   },
   qualification: {
     type: String,
-    enum: ['none', 'diploma', 'degree'],
+    enum: ['none', 'diploma', 'diplomaLevTwo', 'degree'],
     default: 'none',
   },
-  university: {
-    university: { type: mongoose.Schema.Types.Object, ref: 'university' },
-  },
-  course: {
-    course: { type: mongoose.Schema.Types.Object, ref: 'course' },
-  },
-  delivery: {
-    course: { type: mongoose.Schema.Types.Object, ref: 'course' },
-  },
+  university: { type: mongoose.Schema.Types.Object, ref: 'university' },
+
+  course: { type: mongoose.Schema.Types.Object, ref: 'course' },
+
   comment: {
     type: String,
+    default: '',
   },
-  submittedBy: {
-    user: { type: mongoose.Schema.Types.Object, ref: 'user' },
-  },
+  submittedBy: { type: mongoose.Schema.Types.Object, ref: 'user' },
+
   notificationBasic: {
     type: Boolean,
+    default: false,
   },
   notificationAdmin: {
     type: Boolean,
+    default: false,
   },
   status: {
     type: String,
@@ -48,9 +46,15 @@ const ClientSchema = new mongoose.Schema({
     default: 'new',
   },
   statusAdmin: {
-    type: String,
-    enum: ['ready', 'notReady', 'notSuitable'],
-    default: 'notReady',
+    status: {
+      type: String,
+      enum: ['ready', 'notReady', 'notSuitable', 'booked', 'failed', 'passed'],
+      default: 'notReady',
+    },
+    attendance: {
+      type: Boolean,
+      default: false,
+    },
   },
   sfe: {
     type: Boolean,
@@ -66,6 +70,7 @@ const ClientSchema = new mongoose.Schema({
   dateOfUnconditional: {
     type: Date,
   },
+  intake: { type: String },
 })
 
 module.exports = Client = mongoose.model('client', ClientSchema)
