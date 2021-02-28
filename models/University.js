@@ -6,7 +6,7 @@ const UniversitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  campuses: [String],
+  campuses: [{ name: { type: String }, address: { type: String } }],
   intake: [String],
   course: [
     {
