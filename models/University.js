@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+
+// TODO: add Uni logo in the model
 const UniversitySchema = new mongoose.Schema({
   name: {
     type: String,

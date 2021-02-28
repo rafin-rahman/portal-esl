@@ -4,7 +4,7 @@ const courseSchema = new mongoose.Schema({
   university: {
     university: { type: mongoose.Schema.Types.Object, ref: 'university' },
   },
-  level: {
+  category: {
     type: String,
     enum: [
       'foundation',
@@ -19,11 +19,17 @@ const courseSchema = new mongoose.Schema({
   },
   duration: {
     type: Number,
+    required: true,
   },
-  delivery: {
+  studyMode: {
     type: String,
     enum: ['day', 'evening', 'weekend'],
     default: 'day',
+  },
+  delivery: {
+    type: String,
+    enum: ['online', 'blended', 'onCampus'],
+    default: 'onCampus',
   },
 })
 
