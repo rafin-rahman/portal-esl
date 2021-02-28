@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const universitySchema = new mongoose.Schema({
+const UniversitySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -40,6 +40,12 @@ const universitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  commissionBasic: {
+    type: Number,
+  },
+  commissionAdmin: {
+    type: Number,
+  },
 })
 
-module.exports = University = mongoose.model('university', universitySchema)
+module.exports = University = mongoose.model('university', UniversitySchema)
