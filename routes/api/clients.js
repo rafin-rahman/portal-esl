@@ -39,6 +39,7 @@ router.post(
     } = req.body
 
     let marketingOfficer = await User.findOne({ email: submittedBy })
+
     let universityModel = await University.findOne({ name: university })
     if (!universityModel) {
       return res.status(400).json({
@@ -55,9 +56,7 @@ router.post(
     })
     let checkClientExist = await Client.findOne({
       email,
-      university: universityModel.id,
     })
-    console.log(checkClientExist)
 
     try {
       if (!marketingOfficer) {
@@ -87,20 +86,19 @@ router.post(
 
       if (checkClientExist) {
         return res.status(400).json({
-          errors: [
-            { msg: `${name} ${surname} already applied at ${university}` },
-          ],
+          errors: [{ msg: `${name} ${surname} is already on our system` }],
         })
       }
-
+      let applications = [
+        { university: universityModel.id, course: courseModel.id },
+      ]
       let client = new Client({
         name,
         surname,
         email,
         telephone,
         qualification,
-        university: universityModel.id,
-        course: courseModel.id,
+        applications,
         comment,
         intake,
       })
