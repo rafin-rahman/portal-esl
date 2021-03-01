@@ -1,7 +1,12 @@
 import './App.css'
+import Registration from './components/registration'
 
 function App() {
-  return <div className="App">text here</div>
+  return (
+    <div>
+      <Registration></Registration>
+    </div>
+  )
 }
 
 export default App
