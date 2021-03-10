@@ -1,20 +1,19 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import colorPalette from '../../utils/colors'
+import crown from '../../assets/logo/crown-orange.png'
+
 import Container from '@material-ui/core/container'
-import Avatar from '@material-ui/core/Avatar'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import colorPalette from '../../utils/colors'
 import Select from '@material-ui/core/Select'
 import FormControl from '@material-ui/core/formControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import MenuItem from '@material-ui/core/MenuItem'
 import Paper from '@material-ui/core/Paper'
-import crown from '../../assets/logo/crown-orange.png'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -61,7 +60,7 @@ const Register = (props) => {
       ...formData,
       [e.target.name]: e.target.value,
     })
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     if (password !== passwordTwo) {
       console.log('Password not matching')
@@ -170,14 +169,14 @@ const Register = (props) => {
             type="submit"
             fullWidth
             variant="contained"
-            color="#444444"
             className={classes.submit}
+            style={{ backgroundColor: colorPalette.light.buttonSelected }}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
