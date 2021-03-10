@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import colorPalette from '../../utils/colors'
 import crown from '../../assets/logo/crown-orange.png'
+import { setAlert } from '../../actions/alert'
 
 import Container from '@material-ui/core/container'
 import { makeStyles } from '@material-ui/core/styles'
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Register = (props) => {
+const Register = ({ setAlert }) => {
   const classes = useStyles()
   const [formData, setFormData] = useState({
     name: '',
@@ -63,7 +65,7 @@ const Register = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault()
     if (password !== passwordTwo) {
-      console.log('Password not matching')
+      setAlert('Password not matching', 'danger')
     } else {
       console.log('User registered')
     }
@@ -189,4 +191,4 @@ const Register = (props) => {
 
 Register.propTypes = {}
 
-export default Register
+export default connect(null, { setAlert })(Register)
