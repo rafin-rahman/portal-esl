@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import colorPalette from '../../utils/colors'
 import crown from '../../assets/logo/crown-orange.png'
-import { setAlert } from '../../actions/alert'
 
 import Container from '@material-ui/core/container'
 import { makeStyles } from '@material-ui/core/styles'
@@ -16,6 +14,9 @@ import FormControl from '@material-ui/core/formControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import MenuItem from '@material-ui/core/MenuItem'
 import Paper from '@material-ui/core/Paper'
+
+import { connect } from 'react-redux'
+import { setAlert } from '../../actions/alert'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -46,15 +47,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, alertError }) => {
   const classes = useStyles()
   const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    password: '',
-    passwordTwo: '',
-    branch: '',
+    name: 'Rafin',
+    surname: 'Rahman',
+    email: 'test@elizabethschool.com',
+    password: 'a',
+    passwordTwo: 'ab',
+    branch: 'London',
   })
   const { name, surname, email, password, passwordTwo, branch } = formData
   const onChange = (e) =>
@@ -65,7 +66,7 @@ const Register = ({ setAlert }) => {
   const onSubmit = async (e) => {
     e.preventDefault()
     if (password !== passwordTwo) {
-      setAlert('Password not matching', 'danger')
+      setAlert('Password not matching', 'error')
     } else {
       console.log('User registered')
     }
@@ -189,6 +190,8 @@ const Register = ({ setAlert }) => {
   )
 }
 
-Register.propTypes = {}
+function mapStateToProps(state) {
+  return { alertError: state.alert.alertType }
+}
 
-export default connect(null, { setAlert })(Register)
+export default connect(mapStateToProps, { setAlert })(Register)
