@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import colorPalette from '../../utils/colors'
 import crown from '../../assets/logo/crown-orange.png'
 
@@ -17,6 +18,7 @@ import Paper from '@material-ui/core/Paper'
 
 import { connect } from 'react-redux'
 import { setAlert } from '../../actions/alert'
+import myAlert from '../../components/layout/alert'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Register = ({ setAlert, alertError }) => {
+const Register = ({ setAlert }) => {
   const classes = useStyles()
   const [formData, setFormData] = useState({
     name: 'Rafin',
@@ -66,11 +68,13 @@ const Register = ({ setAlert, alertError }) => {
   const onSubmit = async (e) => {
     e.preventDefault()
     if (password !== passwordTwo) {
-      setAlert('Password not matching', 'error')
+      setAlert('Password not matching', 'My error')
+      console.log('THIS IS MY LOG AFTER CLICK:' + myAlert)
     } else {
       console.log('User registered')
     }
   }
+  console.log('THIS IS MY LOG:' + myAlert)
   return (
     <Container components="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={10}>
@@ -189,9 +193,8 @@ const Register = ({ setAlert, alertError }) => {
     </Container>
   )
 }
-
-function mapStateToProps(state) {
-  return { alertError: state.alert.alertType }
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, { setAlert })(Register)
+export default connect(null, { setAlert })(Register)

@@ -4,9 +4,9 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import theme from './theme'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
-import theme from './theme'
 
 // Redux
 import { Provider } from 'react-redux'
